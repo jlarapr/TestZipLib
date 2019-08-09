@@ -5,6 +5,9 @@
 * Windows 10
 ## Libs
 * https://www.zlib.net/
+** Download zlib-1.2.11.tar.gz
+** Compile
+*** mingw32-make.exe -fwin32/Makefile.gcc
 ## Description
 ```
 Created August 8, 2019
