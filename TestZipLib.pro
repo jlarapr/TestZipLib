@@ -1,7 +1,7 @@
 TEMPLATE = app
 CONFIG += console c++17
 CONFIG -= app_bundle
-CONFIG -= qt
+CONFIG += qt
 QMAKE_CXXFLAGS += -std=c++17
 
 SOURCES += \
@@ -34,6 +34,8 @@ CONFIG(release, debug|release):{
      MyMakefile = Makefile.Debug
  }
 
+MYFILE = $$OUT_PWD/$$DESTDIR/".executable"/$$TARGET
+
 OBJECTS_DIR = $$DESTDIR/.obj
 MOC_DIR = $$DESTDIR/.moc
 RCC_DIR = $$DESTDIR/.qrc
@@ -51,6 +53,7 @@ DISTFILES += \
 
 
 win32: LIBS += -L$$PWD/libs/ -lz
+win32: LIBS += -L$$PWD/libs/ -lquazip
 
 INCLUDEPATH += $$PWD/libs
 DEPENDPATH += $$PWD/libs
@@ -60,3 +63,9 @@ DEPENDPATH += $$PWD/include
 
 win32:!win32-g++: PRE_TARGETDEPS += $$PWD/libs/z.lib
 else:win32-g++: PRE_TARGETDEPS += $$PWD/libs/libz.a
+
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/libs/quazip.lib
+else:win32-g++: PRE_TARGETDEPS += $$PWD/libs/libquazip.a
+
+DEPLOY_COMMAND = windeployqt --qmldir $$PWD
+QMAKE_POST_LINK = $${DEPLOY_COMMAND} $${MYFILE}".exe"

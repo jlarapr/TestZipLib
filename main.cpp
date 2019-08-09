@@ -1,5 +1,6 @@
 #include <iostream>
 #include "zlib.h"
+#include "JlCompress.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -85,6 +86,22 @@ int main(int argc, char **argv)
     //    exit(1);
     //}
     //
+
+    if (argc == 3){
+        QString sZipName = argv[1];
+        sZipName += ".zip";
+
+        //QuaZip zip(sZipName);
+        ////zip.setZip64Enabled(true);
+        ////zip.setComment("By Lara");
+        //zip.open(QuaZip::mdCreate);
+
+        JlCompress::compressDir(sZipName , argv[2],true);
+        cout << "Si compressDir" << endl;
+
+        //zip.close();
+        return  0;
+    }
 
     if (argc < 4) {
         cout << "TestZipLib <fileToZip.txt> <zipName.zip> <decompressName.txt>" << endl;

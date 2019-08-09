@@ -234,8 +234,11 @@ release/Makefile: ../TestZipLib.pro C:/Qt/5.13.0/mingw73_64/mkspecs/win32-g++/qm
 		C:/Qt/5.13.0/mingw73_64/mkspecs/features/resolve_config.prf \
 		C:/Qt/5.13.0/mingw73_64/mkspecs/features/exclusive_builds_post.prf \
 		C:/Qt/5.13.0/mingw73_64/mkspecs/features/default_post.prf \
-		C:/Qt/5.13.0/mingw73_64/mkspecs/features/win32/console.prf \
+		C:/Qt/5.13.0/mingw73_64/mkspecs/features/qt.prf \
 		C:/Qt/5.13.0/mingw73_64/mkspecs/features/resources.prf \
+		C:/Qt/5.13.0/mingw73_64/mkspecs/features/moc.prf \
+		C:/Qt/5.13.0/mingw73_64/mkspecs/features/win32/opengl.prf \
+		C:/Qt/5.13.0/mingw73_64/mkspecs/features/win32/console.prf \
 		C:/Qt/5.13.0/mingw73_64/mkspecs/features/qtquickcompiler.prf \
 		C:/Qt/5.13.0/mingw73_64/mkspecs/features/precompile_header.prf \
 		C:/Qt/5.13.0/mingw73_64/mkspecs/features/warn_on.prf \
@@ -245,7 +248,9 @@ release/Makefile: ../TestZipLib.pro C:/Qt/5.13.0/mingw73_64/mkspecs/win32-g++/qm
 		C:/Qt/5.13.0/mingw73_64/mkspecs/features/exceptions.prf \
 		C:/Qt/5.13.0/mingw73_64/mkspecs/features/yacc.prf \
 		C:/Qt/5.13.0/mingw73_64/mkspecs/features/lex.prf \
-		../TestZipLib.pro
+		../TestZipLib.pro \
+		C:/Qt/5.13.0/mingw73_64/lib/Qt5Gui.prl \
+		C:/Qt/5.13.0/mingw73_64/lib/Qt5Core.prl
 	$(QMAKE) -o release\Makefile ..\TestZipLib.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
 C:/Qt/5.13.0/mingw73_64/mkspecs/features/spec_pre.prf:
 C:/Qt/5.13.0/mingw73_64/mkspecs/qdevice.pri:
@@ -418,8 +423,11 @@ C:/Qt/5.13.0/mingw73_64/mkspecs/features/win32/default_pre.prf:
 C:/Qt/5.13.0/mingw73_64/mkspecs/features/resolve_config.prf:
 C:/Qt/5.13.0/mingw73_64/mkspecs/features/exclusive_builds_post.prf:
 C:/Qt/5.13.0/mingw73_64/mkspecs/features/default_post.prf:
-C:/Qt/5.13.0/mingw73_64/mkspecs/features/win32/console.prf:
+C:/Qt/5.13.0/mingw73_64/mkspecs/features/qt.prf:
 C:/Qt/5.13.0/mingw73_64/mkspecs/features/resources.prf:
+C:/Qt/5.13.0/mingw73_64/mkspecs/features/moc.prf:
+C:/Qt/5.13.0/mingw73_64/mkspecs/features/win32/opengl.prf:
+C:/Qt/5.13.0/mingw73_64/mkspecs/features/win32/console.prf:
 C:/Qt/5.13.0/mingw73_64/mkspecs/features/qtquickcompiler.prf:
 C:/Qt/5.13.0/mingw73_64/mkspecs/features/precompile_header.prf:
 C:/Qt/5.13.0/mingw73_64/mkspecs/features/warn_on.prf:
@@ -430,6 +438,8 @@ C:/Qt/5.13.0/mingw73_64/mkspecs/features/exceptions.prf:
 C:/Qt/5.13.0/mingw73_64/mkspecs/features/yacc.prf:
 C:/Qt/5.13.0/mingw73_64/mkspecs/features/lex.prf:
 ../TestZipLib.pro:
+C:/Qt/5.13.0/mingw73_64/lib/Qt5Gui.prl:
+C:/Qt/5.13.0/mingw73_64/lib/Qt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -o release\Makefile ..\TestZipLib.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
 
@@ -441,6 +451,18 @@ clean: release-clean debug-clean  FORCE
 distclean: release-distclean debug-distclean  FORCE
 	-$(DEL_FILE) release\Makefile
 	-$(DEL_FILE) .qmake.stash
+
+release-mocclean:
+	$(MAKE) -f $(MAKEFILE).Release mocclean
+debug-mocclean:
+	$(MAKE) -f $(MAKEFILE).Debug mocclean
+mocclean: release-mocclean debug-mocclean
+
+release-mocables:
+	$(MAKE) -f $(MAKEFILE).Release mocables
+debug-mocables:
+	$(MAKE) -f $(MAKEFILE).Debug mocables
+mocables: release-mocables debug-mocables
 
 check: first
 
