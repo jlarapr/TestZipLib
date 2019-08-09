@@ -16,10 +16,10 @@ CXX           = g++
 DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DMINGW_HAS_SECURE_API=1
 CFLAGS        = -fno-keep-inline-dllexport -O2 -Wall -W -Wextra $(DEFINES)
 CXXFLAGS      = -fno-keep-inline-dllexport -std=c++17 -O2 -std=gnu++1z -Wall -W -Wextra -fexceptions -mthreads $(DEFINES)
-INCPATH       = -I..\..\TestZipLib -I. -I..\..\..\zlib-1.2.11 -IC:\Qt\5.13.0\mingw73_64\mkspecs\win32-g++ 
+INCPATH       = -I..\..\TestZipLib -I. -I..\libs -I..\include -IC:\Qt\5.13.0\mingw73_64\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-s -Wl,-subsystem,console -mthreads
-LIBS        =        -LC:\Users\jlara\Source\QT\zlib-1.2.11 -lz   
+LIBS        =        -LC:\Users\jlara\Source\QT\Projects\TestZipLib\libs -lz   
 QMAKE         = C:\Qt\5.13.0\mingw73_64\bin\qmake.exe
 IDC           = idc
 IDL           = midl
@@ -50,7 +50,7 @@ OBJECTS_DIR   = release\.obj
 SOURCES       = ..\main.cpp 
 OBJECTS       = release/.obj/main.o
 
-DIST          =   ..\main.cpp
+DIST          = README.md  ..\main.cpp
 QMAKE_TARGET  = TestZipLib
 DESTDIR        = release\.executable\ #avoid trailing-slash linebreak
 TARGET         = TestZipLib.exe
@@ -61,7 +61,7 @@ DESTDIR_TARGET = release\.executable\TestZipLib.exe
 first: all
 all: release/Makefile.Release  release/.executable/TestZipLib.exe
 
-release/.executable/TestZipLib.exe: C:/Users/jlara/Source/QT/Projects/TestZipLib/../../zlib-1.2.11/libz.a $(OBJECTS) 
+release/.executable/TestZipLib.exe: C:/Users/jlara/Source/QT/Projects/TestZipLib/libs/libz.a $(OBJECTS) 
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) $(OBJECTS)  $(LIBS)
 
 qmake: FORCE
@@ -105,8 +105,7 @@ compiler_clean:
 
 ####### Compile
 
-release/.obj/main.o: ../main.cpp ../../../zlib-1.2.11/zlib.h \
-		../../../zlib-1.2.11/zconf.h
+release/.obj/main.o: ../main.cpp ../include/zlib.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\.obj\main.o ..\main.cpp
 
 ####### Install

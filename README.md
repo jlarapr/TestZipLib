@@ -11,3 +11,5 @@ Created August 8, 2019
 by Jose Lara
 Try the zlib library, to use it in c ++
 ```
+## Run
+-- TestZipLib <fileToZip.txt> <zipName.zip> <decompressName.txt>

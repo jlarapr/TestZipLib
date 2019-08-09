@@ -87,16 +87,12 @@ int main(int argc, char **argv)
     //
 
     if (argc < 4) {
-        cout << "error con los argumentos de entradas" << endl;
+        cout << "TestZipLib <fileToZip.txt> <zipName.zip> <decompressName.txt>" << endl;
         exit(1);
     }
 
-
-
     compress_one_file(argv[1],argv[2]);
     decompress_one_file(argv[2],argv[3]);
-
-
 
 
     cout << "Hello World!" << endl;

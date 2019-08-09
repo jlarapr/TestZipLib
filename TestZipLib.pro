@@ -44,18 +44,19 @@ TARGET = $$DEPLOY_TARGET
 
 
 
-win32: LIBS += -L$$PWD/../../zlib-1.2.11/ -lz
-
-
-INCLUDEPATH += $$PWD/../../zlib-1.2.11
-DEPENDPATH += $$PWD/../../zlib-1.2.11
-
-win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../../zlib-1.2.11/z.lib
-else:win32-g++: PRE_TARGETDEPS += $$PWD/../../zlib-1.2.11/libz.a
-
 HEADERS +=
 
 DISTFILES += \
     README.md
 
 
+win32: LIBS += -L$$PWD/libs/ -lz
+
+INCLUDEPATH += $$PWD/libs
+DEPENDPATH += $$PWD/libs
+
+INCLUDEPATH += $$PWD/include
+DEPENDPATH += $$PWD/include
+
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/libs/z.lib
+else:win32-g++: PRE_TARGETDEPS += $$PWD/libs/libz.a
